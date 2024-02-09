@@ -5,6 +5,7 @@ import VerifyOTP from "../Screens/auth/VerifyOTP";
 import GetOTP from "../Screens/auth/GetOTP";
 import CompleteProfile from "../Screens/auth/CompleteProfile";
 import Home from "../Screens/home";
+import Describe from "../Screens/description/Describe";
 
 const Stack = createNativeStackNavigator();
 

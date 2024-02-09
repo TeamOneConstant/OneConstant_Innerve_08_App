@@ -24,7 +24,7 @@ const DoctorCard = ({ docImage, docName, ratings, specialization }) => {
         justifyContent: "center",
         backgroundColor: "#fff",
         borderRadius: RFValue(10),
-        borderWidth: RFValue(2),
+        borderWidth: RFValue(1),
         borderColor: "#E3E6ED",
         padding: RFValue(10),
         boxShadow: "0px 6px 16px 0px rgba(227, 230, 237, 0.25)",
@@ -69,12 +69,12 @@ const DoctorCard = ({ docImage, docName, ratings, specialization }) => {
         >
           <View
             style={{
-              width: RFValue(125),
+              width: RFValue(130),
               height: RFValue(30),
               backgroundColor: "rgba(1, 101, 252, 0.2)",
-              borderWidth: 1,
+              borderWidth: RFValue(1),
               borderColor: "#E3E6ED",
-              borderRadius: RFValue(40),
+              borderRadius: RFValue(30),
               flexDirection: "row",
               justifyContent: "center",
               alignItems: "center",

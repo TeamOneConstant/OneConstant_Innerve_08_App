@@ -20,7 +20,7 @@ const Rating = ({ rating }) => {
         <FontAwesome
           key={integerPart + 1}
           name="star-half-full"
-          size={RFValue(22)}
+          size={RFValue(18)}
           color="#FFD700"
         />
       );
