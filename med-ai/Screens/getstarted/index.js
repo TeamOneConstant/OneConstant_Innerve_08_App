@@ -7,7 +7,7 @@ import {
   StatusBar,
   Image,
   Dimensions,
-  TouchableHighlight,
+  TouchableOpacity,
 } from "react-native";
 import { RFValue, RFPercentage } from "react-native-responsive-fontsize";
 import globalStyles from "../../Style/index";
@@ -93,7 +93,7 @@ function GetStarted({ navigation }) {
             potential of artificial intelligence to spearhead
           </Text>
 
-          <TouchableHighlight
+          <TouchableOpacity
             style={[styles.btn]}
             onPress={() => navigation.navigate("GetOTP")}
           >
@@ -107,7 +107,7 @@ function GetStarted({ navigation }) {
             >
               Get Started
             </Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     </>

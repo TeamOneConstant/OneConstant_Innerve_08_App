@@ -5,9 +5,9 @@ import {
   Platform,
   Text,
   StyleSheet,
-  TouchableHighlight,
   Dimensions,
   View,
+  TouchableOpacity,
 } from "react-native";
 import globalStyles from "../../Style/index";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -62,15 +62,15 @@ const VerifyOTP = ({ route, navigation }) => {
           inputCellLength={1}
         />
 
-        <TouchableHighlight
+        <TouchableOpacity
           onPress={() => {
             resendOTP();
           }}
         >
           <Text style={styles.redText}>Resend OTP</Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
 
-        <TouchableHighlight
+        <TouchableOpacity
           style={[
             {
               position: "absolute",
@@ -126,7 +126,7 @@ const VerifyOTP = ({ route, navigation }) => {
               />
             </View>
           )}
-        </TouchableHighlight>
+        </TouchableOpacity>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );

@@ -8,7 +8,7 @@ import {
   StyleSheet,
   StatusBar,
   TextInput,
-  TouchableHighlight,
+  TouchableOpacity,
 } from "react-native";
 import ProgressBar from "react-native-progress/Bar";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -23,7 +23,7 @@ const Describe = () => {
 
   const handleNext = () => {
     if (inputValue.trim() !== "") {
-      setProgress(0.5);
+      setProgress(1);
 
       setTimeout(() => {
         navigation.navigate("UploadRecords", { inputValue });
@@ -36,50 +36,38 @@ const Describe = () => {
   const { width, height } = Dimensions.get("window");
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={[styles.container]}>
       <StatusBar backgroundColor={"#fff"} />
-      <View
-        style={{
-          width: width,
-          height: height,
-          backgroundColor: "#fff",
-        }}
-      >
+      <View style={{ marginHorizontal: RFValue(15) }}>
         <Text
           style={{
-            width: RFValue(105),
-            height: RFValue(20),
-            top: RFValue(20),
-            left: RFValue(25),
             color: "#686868",
             fontFamily: "Poppins-Regular",
             fontSize: RFValue(15),
           }}
         >
-          Section 1 Of 2
+          Section 2 Of 2
         </Text>
 
         <ProgressBar
           width={RFValue(300)}
-          height={RFValue(10)}
+          height={RFValue(6)}
           progress={progress}
           style={{
-            top: RFValue(30),
-            left: RFValue(25),
             borderRadius: 60,
             color: "#0165FC",
+            borderColor: "transparent",
+            marginVertical: RFValue(5),
           }}
+          unfilledColor="#B0CFFE"
         />
 
         <Text
           style={{
-            width: RFValue(250),
-            height: RFValue(30),
-            top: RFValue(60),
-            left: RFValue(25),
             color: "#000",
-            fontFamily: "Poppins-Regular",
+            fontFamily: "Poppins-SemiBold",
             fontSize: RFValue(18),
+            marginVertical: RFValue(10),
           }}
         >
           Describe Your Disease here
@@ -89,11 +77,10 @@ const Describe = () => {
           style={{
             width: RFValue(320),
             height: RFValue(40),
-            top: RFValue(65),
-            left: RFValue(25),
             color: "#686868",
-            fontFamily: "Poppins-Regular",
+            fontFamily: "Poppins-Medium",
             fontSize: RFValue(12),
+            marginBottom: RFValue(5),
           }}
         >
           Kindly provide a detailed description of your symptoms and any
@@ -104,21 +91,20 @@ const Describe = () => {
           value={inputValue}
           onChangeText={setInputValue}
           style={{
-            width: RFValue(315),
             height: RFValue(150),
-            top: RFValue(80),
-            left: RFValue(25),
             padding: RFValue(8),
             textAlignVertical: "top",
             textAlign: "left",
-            borderWidth: 1,
+            borderWidth: RFValue(1),
             borderRadius: 8,
             borderStyle: "solid",
             borderColor: "#0165FC",
+            fontFamily: "Poppins-Regular",
+            fontSize: RFValue(14),
           }}
         />
 
-        <TouchableHighlight style={[styles.btn]} onPress={handleNext}>
+        <TouchableOpacity style={[styles.btn]} onPress={handleNext}>
           <Text
             style={{
               color: "white",
@@ -129,7 +115,7 @@ const Describe = () => {
           >
             Continue
           </Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -140,17 +126,17 @@ export default Describe;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0165FC",
+    backgroundColor: "#fff",
+    padding: RFValue(8),
   },
   btn: {
-    position: "absolute",
-    top: height * 0.9,
-    left: RFValue(20),
-    width: width * 0.9,
+    bottom: RFValue(-300),
+    width: width * 0.88,
     backgroundColor: "#0165FC",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: RFValue(4),
-    padding: RFValue(8),
+    padding: RFValue(10),
+    // margin: RFValue(15),
   },
 });

@@ -6,6 +6,7 @@ import GetOTP from "../Screens/auth/GetOTP";
 import CompleteProfile from "../Screens/auth/CompleteProfile";
 import Home from "../Screens/home";
 import Describe from "../Screens/description/Describe";
+import UploadRecords from "../Screens/description/UploadRecords";
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,16 @@ function MainStackNavigator() {
       <Stack.Screen
         name="Home"
         component={Home}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Describe"
+        component={Describe}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="UploadRecords"
+        component={UploadRecords}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
