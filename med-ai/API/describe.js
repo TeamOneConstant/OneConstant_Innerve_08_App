@@ -1,5 +1,4 @@
 import { API, getAPIWithToken } from "./axios";
-import UploadRecords from "./../Screens/description/UploadRecords";
 
 async function predictDisease(symptoms) {
   const body = {
@@ -36,4 +35,34 @@ async function postUploadedInfo(mr_id, info) {
   const APIWithToken = await getAPIWithToken();
   const res = await APIWithToken.post("/medical/report-ocr-info", body);
 }
-export { predictDisease, uploadRecords, getDoctorList, postUploadedInfo };
+
+async function bookAppointment(
+  docId,
+  day,
+  time,
+  bookFor,
+  name,
+  gender,
+  phone,
+  age
+) {
+  const body = {
+    docId: docId,
+    day: day,
+    time: time,
+    booking_for: bookFor,
+    name: name,
+    gender: gender,
+    phone: phone,
+    age: age,
+  };
+  const APIWithToken = await getAPIWithToken();
+  const res = await APIWithToken.post("/medical/appointment", body);
+}
+export {
+  predictDisease,
+  uploadRecords,
+  getDoctorList,
+  postUploadedInfo,
+  bookAppointment,
+};

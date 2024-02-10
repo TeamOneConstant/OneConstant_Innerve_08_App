@@ -25,14 +25,15 @@ const GetOTP = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [formattedPhoneNumber, setFormattedPhoneNumber] = useState("");
 
+  const phoneNumberRegex = /^\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/;
+
   const handleNumber = (phoneNumber) => {
-    // if (PhoneRegex.test(phoneNumber)) {
-    setAccepted(true);
-    setPhoneNumber(phoneNumber);
-    setFormattedPhoneNumber("+91" + phoneNumber);
-    // } else {
-    //   setAccepted(false);
-    // }
+    if (phoneNumberRegex.test(phoneNumber)) {
+      setAccepted(true);
+      setPhoneNumber(phoneNumber);
+    } else {
+      setAccepted(false);
+    }
   };
 
   const sendOTP = () => {

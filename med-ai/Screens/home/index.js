@@ -25,7 +25,7 @@ function Home() {
   const navigation = useNavigation();
 
   const handleNavigate = () => {
-    navigation.navigate("Describe");
+    navigation.navigate("UploadRecords");
   };
 
   return (
@@ -329,6 +329,19 @@ function Home() {
               paddingBottom: RFValue(10),
             }}
           >
+            <DoctorCard
+              docImage={require("../../assets/images/doctor_img.png")}
+              docName="Dr. Jane Cooper"
+              ratings={4.5}
+              specialization="Pneumonia Expert"
+            />
+            <HospitalCard
+              hospitalImage={require("../../assets/images/demo_hospital.png")}
+              hospitalName="Icon Hospitals"
+              ratings={4}
+              specialty="Pneumonia Expert Hospital"
+            />
+
             <DoctorCard
               docImage={require("../../assets/images/doctor_img.png")}
               docName="Dr. Jane Cooper"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   KeyboardAvoidingView,
   SafeAreaView,
@@ -14,15 +14,18 @@ import { RFValue } from "react-native-responsive-fontsize";
 import OTPTextView from "react-native-otp-textinput";
 import ButtonLoading from "../../Utils/BtnLoadAnimation";
 import Icon, { Icons } from "../../Utils/Icons";
-
+import { createAuthToken, loginWithPhoneNumber } from "../../API/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AppContext } from "../../Utils/Context";
 const { width } = Dimensions.get("window");
 
 const VerifyOTP = ({ route, navigation }) => {
+  const { setUserLogin, setUser } = useContext(AppContext);
   const [accepted, setAccepted] = useState(false);
   const [OTP, setOTP] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { phoneNumber, countryCode } = route.params;
+  const { phoneNumber, isLogin } = route.params;
 
   const handleOTP = (text) => {
     if (text.length === 6) {
@@ -35,7 +38,33 @@ const VerifyOTP = ({ route, navigation }) => {
 
   const resendOTP = () => {};
   const verify = () => {
-    navigation.navigate("CompleteProfile");
+    setLoading(true);
+    loginWithPhoneNumber(phoneNumber)
+      .then((data) => {
+        console.log(data.authToken.access);
+        AsyncStorage.setItem("user", JSON.stringify(data.authToken.access))
+          .then(() => {
+            setUser(data.data);
+            setUserLogin(true);
+            navigation.navigate("BottomTabs", { isLogin: true });
+          })
+          .catch((e) => {
+            console.log("Can't save details");
+          });
+      })
+      .catch((e) => {
+        console.log("Error in log in: ", e);
+        createAuthToken(phoneNumber)
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (

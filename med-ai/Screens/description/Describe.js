@@ -13,21 +13,31 @@ import {
 import ProgressBar from "react-native-progress/Bar";
 import { RFValue } from "react-native-responsive-fontsize";
 import globalStyles from "../../Style/index";
+import { predictDisease } from "../../API/describe";
 const { width, height } = Dimensions.get("window");
 
 const Describe = () => {
   const navigation = useNavigation();
 
   const [inputValue, setInputValue] = useState("");
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(0.5);
 
   const handleNext = () => {
     if (inputValue.trim() !== "") {
       setProgress(1);
 
-      setTimeout(() => {
-        navigation.navigate("UploadRecords", { inputValue });
-      }, 1000);
+      predictDisease(inputValue)
+        .then((res) => {
+          console.log(res);
+          navigation.navigate("Report", {
+            disease: res.data.disease,
+            description: res.data.description,
+            firstAid: res.data.first_aid,
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     } else {
       alert("Please describe your current health issue in detail."); //Warning modal to be added
     }
@@ -90,9 +100,10 @@ const Describe = () => {
         <TextInput
           value={inputValue}
           onChangeText={setInputValue}
+          multiline={true}
           style={{
             height: RFValue(150),
-            padding: RFValue(8),
+            padding: RFValue(10),
             textAlignVertical: "top",
             textAlign: "left",
             borderWidth: RFValue(1),
@@ -101,6 +112,8 @@ const Describe = () => {
             borderColor: "#0165FC",
             fontFamily: "Poppins-Regular",
             fontSize: RFValue(14),
+            flexWrap: "wrap",
+            // textAlign: "justify",
           }}
         />
 

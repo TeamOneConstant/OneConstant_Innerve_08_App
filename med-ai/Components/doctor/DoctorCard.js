@@ -9,12 +9,32 @@ import {
 import { RFValue } from "react-native-responsive-fontsize";
 import Rating from "../rating/Rating";
 import Icon, { Icons } from "../../Utils/Icons";
+import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
-const DoctorCard = ({ docImage, docName, ratings, specialization }) => {
+const DoctorCard = ({ docName, ratings, specialization, id }) => {
+  const navigation = useNavigation();
   function ratingCompleted(rating) {
     console.log("Rating is: " + rating);
   }
+
+  const handleNext = () => {
+    navigation.navigate("DoctorDetails", {
+      docId: id,
+      docName: docName,
+      ratings: ratings,
+      specialization: specialization,
+    });
+  };
+
+  const handleAppointment = () => {
+    navigation.navigate("Booking", {
+      docId: id,
+      docName: docName,
+      ratings: ratings,
+      specialization: specialization,
+    });
+  };
   return (
     <View
       style={{
@@ -47,7 +67,7 @@ const DoctorCard = ({ docImage, docName, ratings, specialization }) => {
           }}
         >
           <Image
-            source={docImage}
+            source={require("../../assets/images/doctor_img.png")}
             style={{
               width: "100%",
               height: "100%",
@@ -147,6 +167,7 @@ const DoctorCard = ({ docImage, docName, ratings, specialization }) => {
           }}
         >
           <TouchableHighlight
+            onPress={handleNext}
             style={{
               flex: 1,
               //   width: RFValue(125),
@@ -172,6 +193,7 @@ const DoctorCard = ({ docImage, docName, ratings, specialization }) => {
           </TouchableHighlight>
 
           <TouchableHighlight
+            onPress={handleAppointment}
             style={{
               flex: 1,
               height: RFValue(40),

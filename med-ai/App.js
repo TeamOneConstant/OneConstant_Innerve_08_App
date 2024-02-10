@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { useCallback, useEffect } from "react";
 import MainStackNavigator from "./Navigation/navigator";
+import Context from "./Utils/Context";
 
 export default function App() {
   const [fontsLoaded, fontError] = useFonts({
@@ -27,7 +28,9 @@ export default function App() {
 
   return (
     <NavigationContainer onLayout={onLayoutRootView}>
-      <MainStackNavigator />
+      <Context>
+        <MainStackNavigator />
+      </Context>
     </NavigationContainer>
   );
 }

@@ -26,7 +26,7 @@ const { width, height } = Dimensions.get("window");
 function UploadRecords() {
   const navigation = useNavigation();
 
-  const [progress, setProgress] = useState(0.5);
+  const [progress, setProgress] = useState(0);
 
   const handleUploadDoc = async () => {
     try {
@@ -76,7 +76,7 @@ function UploadRecords() {
   };
 
   const handleNext = () => {
-    if (progress === 1) {
+    if (progress === 0.5) {
       setTimeout(() => {
         navigation.navigate("Describe");
       }, 1000);
@@ -87,6 +87,10 @@ function UploadRecords() {
     }
   };
 
+  const handleSkip = () => {
+    navigation.navigate("Describe");
+  };
+
   const { width, height } = Dimensions.get("window");
 
   return (
@@ -94,15 +98,35 @@ function UploadRecords() {
       <StatusBar backgroundColor={"#fff"} />
 
       <View style={{ marginHorizontal: RFValue(15) }}>
-        <Text
+        <View
           style={{
-            color: "#686868",
-            fontFamily: "Poppins-Regular",
-            fontSize: RFValue(15),
+            // flex: 1,
+            flexDirection: "row",
+            justifyContent: "space-between",
           }}
         >
-          Section 1 Of 2
-        </Text>
+          <Text
+            style={{
+              color: "#686868",
+              fontFamily: "Poppins-Regular",
+              fontSize: RFValue(15),
+            }}
+          >
+            Section 1 Of 2
+          </Text>
+
+          <TouchableOpacity onPress={handleSkip}>
+            <Text
+              style={{
+                color: "#0165FC",
+                fontFamily: "Poppins-Regular",
+                fontSize: RFValue(15),
+              }}
+            >
+              Skip
+            </Text>
+          </TouchableOpacity>
+        </View>
 
         <ProgressBar
           width={RFValue(300)}

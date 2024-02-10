@@ -44,7 +44,7 @@ const Rating = ({ rating }) => {
   return (
     <View style={styles.container}>
       <View style={styles.starContainer}>{renderStars()}</View>
-      <Text style={styles.ratingNumber}>{rating.toFixed(1)}</Text>
+      <Text style={styles.ratingNumber}>{rating}</Text>
     </View>
   );
 };
