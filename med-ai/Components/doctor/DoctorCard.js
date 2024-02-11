@@ -90,7 +90,8 @@ const DoctorCard = ({ docName, ratings, specialization, id }) => {
           <View
             style={{
               width: RFValue(130),
-              height: RFValue(30),
+              height: RFValue(20),
+              top: RFValue(5),
               backgroundColor: "rgba(1, 101, 252, 0.2)",
               borderWidth: RFValue(1),
               borderColor: "#E3E6ED",

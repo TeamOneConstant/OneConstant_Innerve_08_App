@@ -20,29 +20,26 @@ const { width, height } = Dimensions.get("window");
 const DoctorList = ({ navigation }) => {
   const [doctors, setDoctors] = useState([]);
 
-  // const doctorList = getDoctorList();
-  // console.log(doctorList);
+  // useEffect(() => {
+  //   async function fetchDoctors() {
+  //     try {
+  //       const doctorList = await getDoctorList();
+  //       console.log(doctorList);
+  //       const simplifiedDoctorList = JSON.parse(doctorList).map((doctor) => ({
+  //         id: doctor.id,
+  //         name: doctor.user.full_name,
+  //         rating: doctor.rating,
+  //         specialization: doctor.speciality.join(", "), // Assuming specialization is an array
+  //       }));
 
-  useEffect(() => {
-    async function fetchDoctors() {
-      try {
-        const doctorList = await getDoctorList();
-        console.log(doctorList);
-        const simplifiedDoctorList = JSON.parse(doctorList).map((doctor) => ({
-          id: doctor.id,
-          name: doctor.user.full_name,
-          rating: doctor.rating,
-          specialization: doctor.speciality.join(", "), // Assuming specialization is an array
-        }));
-        cons;
+  //       setDoctors(simplifiedDoctorList);
+  //     } catch (error) {
+  //       console.error("Error fetching doctor list:", error);
+  //     }
+  //   }
+  //   fetchDoctors();
+  // }, [doctors]);
 
-        setDoctors(simplifiedDoctorList);
-      } catch (error) {
-        console.error("Error fetching doctor list:", error);
-      }
-    }
-    fetchDoctors();
-  }, [doctors]);
   return (
     <>
       <SafeAreaView>
@@ -203,15 +200,13 @@ const DoctorList = ({ navigation }) => {
               gap: RFValue(20),
             }}
           >
-            {/* {doctors.map((doctor, index) => (
-              <DoctorCard
-                key={index}
-                id={doctor.id}
-                docName={doctor.name}
-                ratings={doctor.rating}
-                specialization={doctor.specialization}
-              />
-            ))} */}
+            <DoctorCard
+              // key={index}
+              id={5}
+              docName={"Abhishek Khandare"}
+              ratings={3.9}
+              specialization={"MBBS"}
+            />
           </View>
         </View>
       </SafeAreaView>
