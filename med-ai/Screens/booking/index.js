@@ -20,6 +20,7 @@ import Icon, { Icons } from "../../Utils/Icons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import CustomPicker from "../../Components/CustomPicker";
 import { bookAppointment } from "../../API/describe";
+import GenderPicker from "../../Components/CustomPicker/gender";
 
 const { width, height } = Dimensions.get("window");
 
@@ -51,6 +52,8 @@ function Booking({ navigation, route }) {
   }
 
   const onChange = (event, selectedDate) => {
+    // const currentDate = JSON.parse(selectedDate);
+    // const stringifiedDate = JSON.stringify(currentDate);
     const currentDate = selectedDate;
     setShow(false);
     setDate(currentDate);
@@ -70,7 +73,7 @@ function Booking({ navigation, route }) {
   };
 
   const handleBooking = async () => {
-    const id = docId;
+    // const id = docId;
 
     if (
       !date ||
@@ -97,9 +100,9 @@ function Booking({ navigation, route }) {
         age
       );
 
-      navigation.navigate("Congratulation");
+      navigation.navigate("Success");
     } catch (error) {
-      console.error("Error booking appointment:", error);
+      Alert.alert("504 Network Error", "Please check your Internet Connection");
     }
   };
 
@@ -181,10 +184,10 @@ function Booking({ navigation, route }) {
                 {date === null
                   ? "Choose a Day"
                   : date.getDate() +
-                    "/" +
+                    "-" +
                     Number(date.getMonth()) +
                     1 +
-                    "/" +
+                    "-" +
                     date.getFullYear()}
               </Text>
 
@@ -205,180 +208,9 @@ function Booking({ navigation, route }) {
               value={new Date()}
               mode={mode}
               onChange={onChange}
-              dateFormat="DD/MM/YYYY"
+              dateFormat="DD-MM-YYYY"
             />
           )}
-
-          {/* <View
-            style={{
-              width: width * 0.9,
-              height: RFValue(45),
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              alignContent: "center",
-              gap: RFValue(10),
-              top: RFValue(-20),
-              backgroundColor: "transparent",
-            }}
-          >
-            <View
-              style={{
-                width: RFValue(80),
-                height: RFValue(50),
-                borderRadius: RFValue(5),
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#0165FC",
-              }}
-            >
-              <Text
-                style={{
-                  color: "#fff",
-                  fontFamily: "Poppins-Regular",
-                  fontSize: RFValue(13),
-                }}
-              >
-                Today
-              </Text>
-              <Text
-                style={{
-                  color: "#fff",
-                  fontFamily: "Poppins-Medium",
-                  fontSize: RFValue(15),
-                }}
-              >
-                18 Feb
-              </Text>
-            </View>
-
-            <View
-              style={{
-                width: RFValue(80),
-                height: RFValue(50),
-                borderRadius: RFValue(5),
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#fff",
-              }}
-            >
-              <Text
-                style={{
-                  color: "#000",
-                  fontFamily: "Poppins-Regular",
-                  fontSize: RFValue(13),
-                }}
-              >
-                Monday
-              </Text>
-              <Text
-                style={{
-                  color: "#000",
-                  fontFamily: "Poppins-Medium",
-                  fontSize: RFValue(15),
-                }}
-              >
-                19 Feb
-              </Text>
-            </View>
-
-            <View
-              style={{
-                width: RFValue(80),
-                height: RFValue(50),
-                borderRadius: RFValue(5),
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#fff",
-              }}
-            >
-              <Text
-                style={{
-                  color: "#000",
-                  fontFamily: "Poppins-Regular",
-                  fontSize: RFValue(13),
-                }}
-              >
-                Tuesday
-              </Text>
-              <Text
-                style={{
-                  color: "#000",
-                  fontFamily: "Poppins-Medium",
-                  fontSize: RFValue(15),
-                }}
-              >
-                20 Feb
-              </Text>
-            </View>
-
-            <View
-              style={{
-                width: RFValue(80),
-                height: RFValue(50),
-                borderRadius: RFValue(5),
-                borderWidth: RFValue(1),
-                borderColor: "#F00",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-                backgroundColor: "rgba(255, 0, 0, 0.20)",
-              }}
-            >
-              <Text
-                style={{
-                  fontFamily: "Poppins-Regular",
-                  fontSize: RFValue(13),
-                }}
-              >
-                Friday
-              </Text>
-              <Text
-                style={{
-                  fontFamily: "Poppins-Medium",
-                  fontSize: RFValue(15),
-                }}
-              >
-                21 Feb
-              </Text>
-            </View>
-          </View> */}
-          {[
-            "9:00 AM",
-            "10:00 AM",
-            "11:00 AM",
-            "12:00 PM",
-            "13:00 PM",
-            "14:00 PM",
-            "15:00 PM",
-          ].map((timeSlot, index) => (
-            <TouchableOpacity
-              key={index}
-              onPress={() => handleTimeSelection(timeSlot)}
-              style={{
-                width: RFValue(80),
-                height: RFValue(50),
-                borderRadius: RFValue(5),
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: time === timeSlot ? "#0165FC" : "#fff",
-              }}
-            >
-              <Text
-                style={{
-                  color: time === timeSlot ? "#fff" : "#000",
-                  fontFamily: "Poppins-Medium",
-                  fontSize: RFValue(15),
-                }}
-              >
-                {timeSlot}
-              </Text>
-            </TouchableOpacity>
-          ))}
 
           <View
             style={{
@@ -407,19 +239,48 @@ function Booking({ navigation, route }) {
           </View>
 
           <ScrollView
+            contentContainerStyle={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginTop: RFValue(-15),
+            }}
+          >
+            {["9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00"].map(
+              (timeSlot, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => handleTimeSelection(timeSlot)}
+                  style={{
+                    width: RFValue(80),
+                    height: RFValue(50),
+                    borderRadius: RFValue(5),
+                    justifyContent: "center",
+                    alignItems: "center",
+                    // marginRight: RFValue(10), // Add spacing between time slots
+                    backgroundColor: time === timeSlot ? "#0165FC" : "#fff",
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: time === timeSlot ? "#fff" : "#000",
+                      fontFamily: "Poppins-Medium",
+                      fontSize: RFValue(15),
+                    }}
+                  >
+                    {timeSlot}
+                  </Text>
+                </TouchableOpacity>
+              )
+            )}
+          </ScrollView>
+
+          {/* <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{
-              width: width * 0.9,
-              height: RFValue(45),
-              display: "flex",
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
-              alignContent: "center",
-              gap: RFValue(10),
-              top: RFValue(-20),
-              backgroundColor: "transparent",
             }}
           >
             <View
@@ -561,7 +422,7 @@ function Booking({ navigation, route }) {
                 15:00
               </Text>
             </View>
-          </ScrollView>
+          </ScrollView> */}
         </View>
 
         {/* Apply scroll view here */}
@@ -569,7 +430,7 @@ function Booking({ navigation, route }) {
           style={{
             position: "absolute",
             width: width * 0.9,
-            top: RFValue(270),
+            top: RFValue(210),
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -602,11 +463,11 @@ function Booking({ navigation, route }) {
               keyboardType="name-phone-pad"
               autoCapitalize="none"
               value={name}
-              onChangeText={(ev) => setName(ev.target.value)}
+              onChangeText={(text) => setName(text)}
             />
           </View>
 
-          <CustomPicker
+          <GenderPicker
             label="Gender"
             selectedValue={selectedGender}
             onValueChange={(itemValue, itemIndex) =>
@@ -635,7 +496,7 @@ function Booking({ navigation, route }) {
               keyboardType="name-phone-pad"
               autoCapitalize="none"
               value={phone}
-              onChangeText={(ev) => setPhone(ev.target.value)}
+              onChangeText={(text) => setPhone(text)}
             />
           </View>
 
@@ -656,15 +517,12 @@ function Booking({ navigation, route }) {
               keyboardType="name-phone-pad"
               autoCapitalize="none"
               value={age}
-              onChangeText={(ev) => setAge(ev.target.value)}
+              onChangeText={(text) => setAge(text)}
             />
           </View>
         </View>
 
-        <TouchableHighlight
-          style={[styles.btn]}
-          onPress={() => navigation.navigate("")}
-        >
+        <TouchableHighlight style={[styles.btn]} onPress={handleBooking}>
           <View
             style={{
               display: "flex",
@@ -703,6 +561,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    paddingHorizontal: RFValue(10),
   },
   headerContainer: {
     display: "flex",
