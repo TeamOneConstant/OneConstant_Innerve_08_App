@@ -37,8 +37,8 @@ async function postUploadedInfo(mr_id, info) {
 }
 
 async function bookAppointment(
-  docId,
-  day,
+  // docId,
+  date,
   time,
   bookFor,
   name,
@@ -47,8 +47,9 @@ async function bookAppointment(
   age
 ) {
   const body = {
-    docId: docId,
-    day: day,
+    // docId: docId,
+    date: `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`,
+
     time: time,
     booking_for: bookFor,
     name: name,

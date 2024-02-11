@@ -20,6 +20,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import * as DocumentPicker from "expo-document-picker";
 import ImagePicker from "react-native-image-picker";
 import globalStyles from "../../Style/index";
+import { MlkitOcrResult } from "react-native-mlkit-ocr";
 import Icon, { Icons } from "../../Utils/Icons";
 const { width, height } = Dimensions.get("window");
 
@@ -40,6 +41,8 @@ function UploadRecords() {
       }
 
       const fileUri = result.uri;
+      // const resultFromUri = await MlkitOcr.detectFromUri(uri);
+      // console.log(resultFromUri);
       await AsyncStorage.setItem("fileUri", fileUri);
     } catch (error) {
       if (DocumentPicker.isCancel(error)) {

@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Dimensions,
   View,
+  Alert,
   TouchableOpacity,
 } from "react-native";
 import globalStyles from "../../Style/index";
@@ -59,7 +60,10 @@ const VerifyOTP = ({ route, navigation }) => {
             console.log(data);
           })
           .catch((e) => {
-            console.log(e);
+            Alert.alert(
+              "504 Network Error",
+              "Please check your Internet Connection"
+            );
           });
       })
       .finally(() => {

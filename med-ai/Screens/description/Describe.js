@@ -9,6 +9,7 @@ import {
   StatusBar,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import ProgressBar from "react-native-progress/Bar";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -36,7 +37,10 @@ const Describe = () => {
           });
         })
         .catch((e) => {
-          console.log(e);
+          Alert.alert(
+            "504 Network Error",
+            "Please check your Internet Connection"
+          );
         });
     } else {
       alert("Please describe your current health issue in detail."); //Warning modal to be added
